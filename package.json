@@ -1,0 +1,17 @@
+{
+  "name": "jarir-multani-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio of Jarir Multani — Full Stack MERN Developer",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static HTML build ready'",
+    "start": "echo 'Static site'"
+  },
+  "keywords": [
+    "portfolio",
+    "jarir-multani",
+    "full-stack-developer"
+  ],
+  "author": "Jarir Multani",
+  "license": "MIT"
+}
