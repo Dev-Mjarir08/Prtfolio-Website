@@ -164,13 +164,12 @@
     const frame = document.querySelector('.hero__portrait-frame');
     if (hasGSAP && !prefersReduced) {
       const tl = gsap.timeline({ delay: 0.1 });
-      tl.to(frame, { clipPath: 'inset(0% 0 0 0)', duration: 1.3, ease: 'power4.out' })
+      tl.fromTo(frame, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out' })
         .to('.hero__portrait-frame img', { scale: 1, duration: 1.6, ease: 'power3.out' }, '<')
         .to(words, { y: 0, duration: 1.1, ease: 'power4.out', stagger: 0.09 }, '-=1.1')
         .from('.hero__meta, .hero__cta-row', { opacity: 0, y: 24, duration: 0.9, stagger: 0.12, ease: 'power3.out' }, '-=0.6');
     } else {
       words.forEach((w) => (w.style.transform = 'translateY(0)'));
-      if (frame) frame.style.clipPath = 'inset(0)';
     }
 
     // Mouse parallax
@@ -231,7 +230,7 @@
     // Image clip reveals
     const imgObs = new IntersectionObserver((entries, o) => {
       entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); o.unobserve(e.target); } });
-    }, { threshold: 0.25 });
+    }, { threshold: 0.15 });
     document.querySelectorAll('.reveal-img').forEach((el) => imgObs.observe(el));
 
     // Paragraph line reveals
