@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Portfolio of Jarir Multani — Full Stack MERN Developer",
   "main": "index.html",
+  "type": "module",
   "scripts": {
-    "build": "echo 'Static HTML build ready'",
-    "start": "echo 'Static site'"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [
     "portfolio",
@@ -13,5 +15,9 @@
     "full-stack-developer"
   ],
   "author": "Jarir Multani",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.5",
+    "vite": "^8.2.1"
+  }
 }
