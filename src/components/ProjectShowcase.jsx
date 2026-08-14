@@ -14,23 +14,24 @@ export default React.memo(function ProjectShowcase({ projects, setCursor, mouseP
     if (!showcaseRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Reveal project cards sequentially
+      // Reveal project cards sequentially & rapidly
       const cards = gsap.utils.toArray('.project-card');
       cards.forEach((card, index) => {
         gsap.from(card, {
-          y: 60,
+          y: 25,
           opacity: 0,
-          duration: 0.9,
-          ease: 'power3.out',
+          duration: 0.4,
+          ease: 'power2.out',
           clearProps: 'transform,opacity',
           scrollTrigger: {
             trigger: card,
-            start: 'top 85%',
+            start: 'top 98%',
             onEnter: () => setActiveProjectIdx(index)
           }
         });
       });
     }, showcaseRef);
+
 
     return () => ctx.revert();
   }, []);

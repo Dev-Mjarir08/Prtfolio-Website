@@ -8,13 +8,14 @@ export default function LazyBoundary({ children }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    // When lazy-loaded component mounts into DOM, refresh GSAP ScrollTrigger
-    const timer = setTimeout(() => {
+    // Instantly refresh GSAP ScrollTrigger when lazy section mounts
+    const rafId = requestAnimationFrame(() => {
       ScrollTrigger.refresh();
-    }, 150);
+    });
 
-    return () => clearTimeout(timer);
+    return () => cancelAnimationFrame(rafId);
   }, []);
+
 
   return (
     <div ref={containerRef} className="lazy-section-boundary">

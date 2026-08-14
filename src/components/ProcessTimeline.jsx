@@ -29,18 +29,19 @@ export default React.memo(function ProcessTimeline({ steps, setCursor }) {
 
       // 2. Reveal process steps sequentially
       gsap.from('.process__step', {
-        y: 50,
+        y: 20,
         opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: 'power3.out',
+        stagger: 0.08,
+        duration: 0.4,
+        ease: 'power2.out',
         clearProps: 'transform,opacity',
         scrollTrigger: {
           trigger: '.process__list',
-          start: 'top 75%'
+          start: 'top 98%'
         }
       });
     }, containerRef);
+
 
 
     return () => ctx.revert();

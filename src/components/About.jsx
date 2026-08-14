@@ -36,17 +36,18 @@ export default React.memo(function About({ data, setCursor }) {
 
       gsap.from(splitText.lines, {
         opacity: 0,
-        y: 24,
-        rotateX: -10,
-        stagger: 0.05,
-        duration: 0.8,
-        ease: 'power3.out',
+        y: 15,
+        stagger: 0.03,
+        duration: 0.4,
+        ease: 'power2.out',
+        clearProps: 'all',
         scrollTrigger: {
           trigger: textRef.current,
-          start: 'top 75%'
+          start: 'top 98%'
         }
       });
     }, sectionRef);
+
 
     return () => ctx.revert();
   }, []);
