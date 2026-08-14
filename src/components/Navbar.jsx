@@ -42,9 +42,10 @@ export default React.memo(function Navbar({ data, setCursor, onToggleMenu, menuO
           onMouseEnter={() => setCursor('hover', 'HOME')}
           onMouseLeave={() => setCursor('default')}
         >
-          <span className="nav__logo-mark">{data.personalInfo.shortName}</span>
+          <img src="assets/logo.png" alt="Jarir Multani Logo" className="nav__logo-img" />
           <span className="nav__logo-text">{data.personalInfo.name}</span>
         </a>
+
 
         <nav className="nav__links" id="navLinks">
           {[
