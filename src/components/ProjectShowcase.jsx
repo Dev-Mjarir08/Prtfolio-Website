@@ -14,27 +14,26 @@ export default React.memo(function ProjectShowcase({ projects, setCursor, mouseP
     if (!showcaseRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Reveal project cards sequentially & rapidly
+      // Reveal project cards sequentially
       const cards = gsap.utils.toArray('.project-card');
-      cards.forEach((card, index) => {
+      cards.forEach((card) => {
         gsap.from(card, {
-          y: 25,
+          y: 20,
           opacity: 0,
-          duration: 0.4,
+          duration: 0.35,
           ease: 'power2.out',
           clearProps: 'transform,opacity',
           scrollTrigger: {
             trigger: card,
-            start: 'top 98%',
-            onEnter: () => setActiveProjectIdx(index)
+            start: 'top 98%'
           }
         });
       });
     }, showcaseRef);
 
-
     return () => ctx.revert();
   }, []);
+
 
   // 3D image tilt distortion on hover
   const getTiltTransform = (cardId) => {
@@ -77,7 +76,9 @@ export default React.memo(function ProjectShowcase({ projects, setCursor, mouseP
                     height="896" 
                     loading="lazy"
                     decoding="async" 
+                    onLoad={() => ScrollTrigger.refresh()}
                   />
+
                   <div className="project__media-badge">EXPLORE DETAILS ↗</div>
                 </div>
                 <span className="project__cat">{project.category}</span>

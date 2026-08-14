@@ -1,7 +1,6 @@
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState } from 'react';
 import { PORTFOLIO_DATA } from './data/portfolioData';
 import { MotionProvider, useMotion } from './context/MotionContext';
-import LazyBoundary from './components/LazyBoundary';
 
 import Preloader from './components/Preloader';
 import CustomCursor from './components/CustomCursor';
@@ -9,21 +8,13 @@ import Navbar from './components/Navbar';
 import MobileMenu from './components/MobileMenu';
 import Hero from './components/hero/Hero';
 import About from './components/About';
-
-// Lazy-loaded components below the fold for bundle & performance optimization
-const ProjectShowcase = lazy(() => import('./components/ProjectShowcase'));
-const SkillsNetwork = lazy(() => import('./components/SkillsNetwork'));
-const ProcessTimeline = lazy(() => import('./components/ProcessTimeline'));
-const StatsCounter = lazy(() => import('./components/StatsCounter'));
-const Testimonials = lazy(() => import('./components/Testimonials'));
-const Contact = lazy(() => import('./components/Contact'));
-const Footer = lazy(() => import('./components/Footer'));
-
-const SectionSkeleton = () => (
-  <div style={{ minHeight: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: 0.2, fontSize: '0.8rem', letterSpacing: '0.15em' }}>
-    LOADING...
-  </div>
-);
+import ProjectShowcase from './components/ProjectShowcase';
+import SkillsNetwork from './components/SkillsNetwork';
+import ProcessTimeline from './components/ProcessTimeline';
+import StatsCounter from './components/StatsCounter';
+import Testimonials from './components/Testimonials';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 function MainContent() {
   const {
@@ -82,60 +73,44 @@ function MainContent() {
           setCursor={setCursor} 
         />
 
-        <Suspense fallback={<SectionSkeleton />}>
-          <LazyBoundary>
-            <ProjectShowcase 
-              projects={PORTFOLIO_DATA.projects} 
-              setCursor={setCursor} 
-              mousePos={mousePos} 
-            />
-          </LazyBoundary>
+        <ProjectShowcase 
+          projects={PORTFOLIO_DATA.projects} 
+          setCursor={setCursor} 
+          mousePos={mousePos} 
+        />
 
-          <LazyBoundary>
-            <SkillsNetwork 
-              skills={PORTFOLIO_DATA.skills} 
-              technologies={PORTFOLIO_DATA.technologies} 
-              setCursor={setCursor} 
-              preloaderComplete={preloaderComplete}
-            />
-          </LazyBoundary>
+        <SkillsNetwork 
+          skills={PORTFOLIO_DATA.skills} 
+          technologies={PORTFOLIO_DATA.technologies} 
+          setCursor={setCursor} 
+          preloaderComplete={preloaderComplete}
+        />
 
-          <LazyBoundary>
-            <ProcessTimeline 
-              steps={PORTFOLIO_DATA.processSteps} 
-              setCursor={setCursor} 
-            />
-          </LazyBoundary>
+        <ProcessTimeline 
+          steps={PORTFOLIO_DATA.processSteps} 
+          setCursor={setCursor} 
+        />
 
-          <LazyBoundary>
-            <StatsCounter 
-              stats={PORTFOLIO_DATA.stats} 
-              setCursor={setCursor} 
-            />
-          </LazyBoundary>
+        <StatsCounter 
+          stats={PORTFOLIO_DATA.stats} 
+          setCursor={setCursor} 
+        />
 
-          <LazyBoundary>
-            <Testimonials 
-              testimonials={PORTFOLIO_DATA.testimonials} 
-              setCursor={setCursor} 
-            />
-          </LazyBoundary>
+        <Testimonials 
+          testimonials={PORTFOLIO_DATA.testimonials} 
+          setCursor={setCursor} 
+        />
 
-          <LazyBoundary>
-            <Contact 
-              data={PORTFOLIO_DATA} 
-              setCursor={setCursor} 
-            />
-          </LazyBoundary>
+        <Contact 
+          data={PORTFOLIO_DATA} 
+          setCursor={setCursor} 
+        />
 
-          <LazyBoundary>
-            <Footer 
-              data={PORTFOLIO_DATA} 
-              setCursor={setCursor} 
-              lenis={lenis} 
-            />
-          </LazyBoundary>
-        </Suspense>
+        <Footer 
+          data={PORTFOLIO_DATA} 
+          setCursor={setCursor} 
+          lenis={lenis} 
+        />
       </main>
     </>
   );
@@ -148,6 +123,7 @@ export default function App() {
     </MotionProvider>
   );
 }
+
 
 
 
