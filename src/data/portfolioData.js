@@ -24,7 +24,7 @@ export const PORTFOLIO_DATA = {
       shortTitle: "AMDOX ERP",
       subtitle: "MERN Stack · Enterprise ERP System",
       category: "MERN Stack · Enterprise ERP System",
-      image: "assets/amdox-erp.png",
+      image: "/assets/amdox-erp.png",
       description: "A full-stack enterprise resource planning (ERP) system engineered with the MERN stack (MongoDB, Express.js, React.js, Node.js), featuring interactive data analytics with Recharts, RESTful API architecture, and responsive dashboard UI.",
       tags: ["MongoDB", "Express.js", "React.js", "Node.js", "Tailwind CSS", "Recharts", "REST API"],
       github: "https://github.com/Dev-Mjarir08/project-Amdox",
@@ -48,7 +48,7 @@ export const PORTFOLIO_DATA = {
       title: "NOIR",
       subtitle: "Creative Web · Luxury Fashion",
       category: "Creative Web · Luxury Fashion",
-      image: "assets/Noir.png",
+      image: "/assets/Noir.png",
       description: "An Awwwards-grade luxury clothing experience featuring GSAP ScrollTrigger timelines, clip-path morphing menu, live statistics counters, and Lenis smooth scrolling.",
       tags: ["HTML5", "Tailwind CSS", "JavaScript (ES6)", "GSAP", "Lenis"],
       github: "https://github.com/Dev-Mjarir08/Noir-Clothing-store",
@@ -72,7 +72,7 @@ export const PORTFOLIO_DATA = {
       shortTitle: "emsPRO",
       subtitle: "MERN Stack · Employee Management",
       category: "MERN Stack · Employee Management",
-      image: "assets/EMS.png",
+      image: "/assets/EMS.png",
       description: "A full-stack employee management system built with Node.js, Express.js, MongoDB, and RESTful APIs, providing complete CRUD operations, employee tracking, role management, and interactive UI.",
       tags: ["Node.js", "Express.js", "MongoDB", "React.js", "REST API"],
       github: "https://github.com/Dev-Mjarir08/emsPRO",
@@ -95,7 +95,7 @@ export const PORTFOLIO_DATA = {
       title: "SHOPINDIA",
       subtitle: "MERN Stack · Full Stack E-Commerce",
       category: "MERN Stack · Full Stack E-Commerce",
-      image: "assets/Ecommerce-plateform.png",
+      image: "/assets/Ecommerce-plateform.png",
       description: "A full-stack e-commerce platform built with the MERN stack (MongoDB, Express, React, Node.js), featuring dynamic product filtering, cart management, RESTful APIs, and responsive design.",
       tags: ["MongoDB", "Express.js", "React.js", "Node.js", "REST API", "Bootstrap 5"],
       github: "https://github.com/Dev-Mjarir08/react-PR-13",
@@ -118,7 +118,7 @@ export const PORTFOLIO_DATA = {
       title: "MOVIE LIBRARY APP",
       subtitle: "React & Redux · API Integration",
       category: "React & Redux · API Integration",
-      image: "assets/Movie-Librery.png",
+      image: "/assets/Movie-Librery.png",
       description: "Interactive movie discovery application using Redux state management, Axios REST API integration, real-time search filtering, and responsive Bootstrap layout.",
       tags: ["React.js", "Redux", "Axios", "Bootstrap 5", "REST API"],
       github: "https://github.com/Dev-Mjarir08/Exam-React.js",
@@ -135,6 +135,7 @@ export const PORTFOLIO_DATA = {
         ]
       }
     },
+
     
   ],
 

@@ -1675,7 +1675,26 @@ h1, h2, h3, h4 {
   }
 }
 
+@media (pointer: coarse), (max-width: 768px) {
+  .cursor, .cursor-dot {
+    display: none !important;
+  }
+  body, a, button, input, textarea {
+    cursor: auto !important;
+  }
+}
+
 @media (max-width: 768px) {
+  .nav {
+    padding: 1rem 1.2rem;
+  }
+  .nav__logo-img {
+    height: 30px;
+    max-width: 100px;
+  }
+  .nav__logo-text {
+    font-size: 0.85rem;
+  }
   .skills__grid {
     grid-template-columns: 1fr;
   }
@@ -1697,6 +1716,54 @@ h1, h2, h3, h4 {
   }
 }
 
+@media (max-width: 480px) {
+  :root {
+    --pad: 1.2rem;
+  }
+  .hero__title {
+    font-size: clamp(2.2rem, 10vw, 3.8rem);
+  }
+  .hero__role {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero__role-static, .hero__role-rotate {
+    font-size: 0.85rem;
+  }
+  .project__media {
+    aspect-ratio: 16 / 10;
+  }
+  .project__title {
+    font-size: 1.4rem;
+  }
+  .project__info {
+    padding: 1rem 0;
+  }
+  .section-head__title {
+    font-size: clamp(2rem, 8vw, 3.2rem);
+  }
+  .contact__title {
+    font-size: clamp(2.8rem, 12vw, 4.5rem);
+  }
+  .contact__mail {
+    font-size: 1.1rem;
+    word-break: break-all;
+  }
+  .quote {
+    padding: 1.8rem;
+  }
+  .quote p {
+    font-size: 1rem;
+  }
+  .stat__val {
+    font-size: 3rem;
+  }
+  .stats__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
 /* ================= REDUCED MOTION ================= */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -1712,3 +1779,4 @@ h1, h2, h3, h4 {
     cursor: auto !important;
   }
 }
+

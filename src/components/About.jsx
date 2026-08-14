@@ -67,8 +67,9 @@ export default React.memo(function About({ data, setCursor }) {
         >
           <div className="reveal-img">
             <img 
-              src="assets/profile.png" 
+              src="/assets/profile.png" 
               alt="Jarir Multani portrait" 
+
               width="896" 
               height="1200" 
               loading="lazy"
