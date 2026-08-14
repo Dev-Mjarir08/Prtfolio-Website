@@ -7,7 +7,6 @@ import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import MobileMenu from './components/MobileMenu';
 import Hero from './components/hero/Hero';
-import Marquee from './components/Marquee';
 import About from './components/About';
 import ProjectShowcase from './components/ProjectShowcase';
 import SkillsNetwork from './components/SkillsNetwork';
@@ -69,7 +68,6 @@ export default function App() {
           setCursor={setCursor} 
         />
 
-
         <About 
           data={PORTFOLIO_DATA} 
           setCursor={setCursor} 
@@ -117,3 +115,5 @@ export default function App() {
     </>
   );
 }
+
+

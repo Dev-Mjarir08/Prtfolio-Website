@@ -1,29 +1,36 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Navbar({ data, setCursor, onToggleMenu, menuOpen }) {
+export default React.memo(function Navbar({ data, setCursor, onToggleMenu, menuOpen }) {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
+    let timer = null;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      if (timer) return;
+      timer = setTimeout(() => {
+        timer = null;
+        setScrolled(window.scrollY > 40);
 
-      // Section intersection observer fallback via scroll position
-      const sections = ['about', 'work', 'skills', 'process', 'contact'];
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 250 && rect.bottom >= 250) {
-            setActiveSection(id);
-            break;
+        const sections = ['about', 'work', 'skills', 'process', 'contact'];
+        for (const id of sections) {
+          const el = document.getElementById(id);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= 250 && rect.bottom >= 250) {
+              setActiveSection(id);
+              break;
+            }
           }
         }
-      }
+      }, 100);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
@@ -81,4 +88,5 @@ export default function Navbar({ data, setCursor, onToggleMenu, menuOpen }) {
       </div>
     </header>
   );
-}
+});
+

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Footer({ data, setCursor, lenis }) {
+export default React.memo(function Footer({ data, setCursor, lenis }) {
   const scrollToTop = () => {
     if (lenis) {
       lenis.scrollTo(0);
@@ -78,4 +78,5 @@ export default function Footer({ data, setCursor, lenis }) {
       </div>
     </footer>
   );
-}
+});
+

@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
 
 export function useMotionSystem() {
   const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
@@ -14,6 +15,8 @@ export function useMotionSystem() {
   
   const lenisRef = useRef(null);
   const prevMouseRef = useRef({ x: 0, y: 0, time: Date.now() });
+  const rafMouseMoveRef = useRef(null);
+  const pendingMouseRef = useRef(null);
 
   // Initialize Lenis smooth scroll & sync with GSAP ScrollTrigger
   useEffect(() => {
@@ -33,16 +36,26 @@ export function useMotionSystem() {
 
     lenisRef.current = lenis;
 
+    let lastScrollVal = 0;
+    let scrollVelocityTimer = null;
+
     // Connect Lenis to GSAP ScrollTrigger
     lenis.on('scroll', (e) => {
       ScrollTrigger.update();
       const currentScroll = e.scroll || window.scrollY;
-      const vel = currentScroll - (lastScrollRef.current || 0);
-      setScrollVelocity(vel);
-      lastScrollRef.current = currentScroll;
-    });
+      const vel = currentScroll - lastScrollVal;
+      lastScrollVal = currentScroll;
 
-    const lastScrollRef = { current: 0 };
+      // Only update scroll velocity state if significantly changed
+      if (Math.abs(vel) > 1) {
+        setScrollVelocity(vel);
+      }
+
+      clearTimeout(scrollVelocityTimer);
+      scrollVelocityTimer = setTimeout(() => {
+        setScrollVelocity(0);
+      }, 100);
+    });
 
     function updateRaf(time) {
       lenis.raf(time);
@@ -53,6 +66,7 @@ export function useMotionSystem() {
 
     return () => {
       cancelAnimationFrame(rafId);
+      clearTimeout(scrollVelocityTimer);
       lenis.destroy();
     };
   }, []);
@@ -60,37 +74,62 @@ export function useMotionSystem() {
   // Refresh ScrollTrigger when preloader completes
   useEffect(() => {
     if (preloaderComplete) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         ScrollTrigger.refresh();
       }, 150);
+      return () => clearTimeout(timer);
     }
   }, [preloaderComplete]);
 
-  // Global mouse position & velocity tracking
+  // Global mouse position & velocity tracking throttled via RAF
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const processMouseMove = () => {
+      if (!pendingMouseRef.current) return;
+      const e = pendingMouseRef.current;
+      pendingMouseRef.current = null;
+
       const now = Date.now();
       const dt = Math.max(1, now - prevMouseRef.current.time);
-      const vx = (e.clientX - prevMouseRef.current.x) / dt;
-      const vy = (e.clientY - prevMouseRef.current.y) / dt;
-      const speed = Math.sqrt(vx * vx + vy * vy);
+      const dx = e.clientX - prevMouseRef.current.x;
+      const dy = e.clientY - prevMouseRef.current.y;
 
-      setMousePos({ x: e.clientX, y: e.clientY });
-      setMouseVelocity({ vx, vy, speed });
+      // Only update state if moved more than 2px to avoid micro-re-renders
+      if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+        const vx = dx / dt;
+        const vy = dy / dt;
+        const speed = Math.sqrt(vx * vx + vy * vy);
 
-      prevMouseRef.current = { x: e.clientX, y: e.clientY, time: now };
+        setMousePos({ x: e.clientX, y: e.clientY });
+        setMouseVelocity({ vx, vy, speed });
+
+        prevMouseRef.current = { x: e.clientX, y: e.clientY, time: now };
+      }
+      rafMouseMoveRef.current = null;
+    };
+
+    const handleMouseMove = (e) => {
+      pendingMouseRef.current = e;
+      if (!rafMouseMoveRef.current) {
+        rafMouseMoveRef.current = requestAnimationFrame(processMouseMove);
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      if (rafMouseMoveRef.current) {
+        cancelAnimationFrame(rafMouseMoveRef.current);
+      }
     };
   }, []);
 
-  const setCursor = (type, label = '') => {
-    setCursorState({ type, label });
-  };
+  const setCursor = useCallback((type, label = '') => {
+    setCursorState((prev) => {
+      if (prev.type === type && prev.label === label) return prev;
+      return { type, label };
+    });
+  }, []);
 
   return {
     mousePos,
@@ -103,3 +142,4 @@ export function useMotionSystem() {
     setPreloaderComplete
   };
 }
+

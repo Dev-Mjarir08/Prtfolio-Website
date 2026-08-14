@@ -38,8 +38,10 @@ function FloatingKnot({ mousePos, scrollVelocity }) {
   );
 }
 
-export default function HeroCanvas({ mousePos, scrollVelocity }) {
+export default React.memo(function HeroCanvas({ mousePos, scrollVelocity }) {
   const [webglSupported, setWebglSupported] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     // Detect WebGL support and reduced motion
@@ -58,18 +60,36 @@ export default function HeroCanvas({ mousePos, scrollVelocity }) {
     }
   }, []);
 
+  // Viewport IntersectionObserver to pause rendering when off-screen
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   if (!webglSupported) {
     return <div className="hero-canvas-fallback" />;
   }
 
   return (
-    <div className="hero-canvas-wrapper" style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: 0.45 }}>
-      <Canvas camera={{ position: [0, 0, 5], fov: 50 }} gl={{ alpha: true, antialias: true }}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 10]} intensity={1.2} color="#F5E3BD" />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#C6A56B" />
-        <FloatingKnot mousePos={mousePos} scrollVelocity={scrollVelocity} />
-      </Canvas>
+    <div ref={containerRef} className="hero-canvas-wrapper" style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: 0.45 }}>
+      {isVisible && (
+        <Canvas camera={{ position: [0, 0, 5], fov: 50 }} gl={{ alpha: true, antialias: false, powerPreference: 'high-performance' }} dpr={[1, 1.5]}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 10]} intensity={1.2} color="#F5E3BD" />
+          <pointLight position={[-10, -10, -10]} intensity={0.5} color="#C6A56B" />
+          <FloatingKnot mousePos={mousePos} scrollVelocity={scrollVelocity} />
+        </Canvas>
+      )}
     </div>
   );
-}
+});
+

@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Testimonials({ testimonials, setCursor }) {
+export default React.memo(function Testimonials({ testimonials, setCursor }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -17,12 +17,14 @@ export default function Testimonials({ testimonials, setCursor }) {
         stagger: 0.15,
         duration: 0.8,
         ease: 'power3.out',
+        clearProps: 'transform,opacity',
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 80%'
         }
       });
     }, containerRef);
+
 
     return () => ctx.revert();
   }, []);
@@ -52,4 +54,5 @@ export default function Testimonials({ testimonials, setCursor }) {
       </div>
     </section>
   );
-}
+});
+

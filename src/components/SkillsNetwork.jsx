@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function SkillsNetwork({ skills, technologies, setCursor, preloaderComplete }) {
+export default React.memo(function SkillsNetwork({ skills, technologies, setCursor, preloaderComplete }) {
   const [activeTag, setActiveTag] = useState(null);
   const sectionRef = useRef(null);
 
@@ -109,4 +109,5 @@ export default function SkillsNetwork({ skills, technologies, setCursor, preload
       </div>
     </section>
   );
-}
+});
+

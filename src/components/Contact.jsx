@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-export default function Contact({ data, setCursor }) {
+export default React.memo(function Contact({ data, setCursor }) {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,7 +66,7 @@ export default function Contact({ data, setCursor }) {
         </div>
       </div>
 
-      <form className="contact__form" onSubmit={handleSubmit} novalidate>
+      <form className="contact__form" onSubmit={handleSubmit} noValidate>
         <div className="field">
           <input 
             type="text" 
@@ -141,4 +141,5 @@ export default function Contact({ data, setCursor }) {
       </form>
     </section>
   );
-}
+});
+

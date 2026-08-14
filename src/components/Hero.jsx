@@ -6,27 +6,29 @@ import HeroCanvas from './HeroCanvas';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Hero({ data, mousePos, scrollVelocity, setCursor }) {
+const ROLES = [
+  'scalable web applications',
+  'React 19 interfaces',
+  'RESTful MERN APIs',
+  'C++ DSA logic'
+];
+
+export default React.memo(function Hero({ data, mousePos, scrollVelocity, setCursor }) {
   const heroRef = useRef(null);
   const titleRef = useRef(null);
   const bgWordRef = useRef(null);
   const roleRef = useRef(null);
 
   const [roleIndex, setRoleIndex] = useState(0);
-  const roles = [
-    'scalable web applications',
-    'React 19 interfaces',
-    'RESTful MERN APIs',
-    'C++ DSA logic'
-  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length);
+      setRoleIndex((prev) => (prev + 1) % ROLES.length);
     }, 2800);
 
     return () => clearInterval(interval);
-  }, [roles.length]);
+  }, []);
+
 
   useEffect(() => {
     if (!heroRef.current || !titleRef.current) return;
@@ -126,7 +128,7 @@ export default function Hero({ data, mousePos, scrollVelocity, setCursor }) {
           <span className="hero__role-static">Specializing in</span>
           <span ref={roleRef} className="hero__role-rotate">
             <span key={roleIndex} className="role-fade">
-              {roles[roleIndex]}
+              {ROLES[roleIndex]}
             </span>
           </span>
         </div>
@@ -155,4 +157,5 @@ export default function Hero({ data, mousePos, scrollVelocity, setCursor }) {
       </div>
     </section>
   );
-}
+});
+

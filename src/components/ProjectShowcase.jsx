@@ -5,7 +5,7 @@ import ProjectModal from './ProjectModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ProjectShowcase({ projects, setCursor, mousePos }) {
+export default React.memo(function ProjectShowcase({ projects, setCursor, mousePos }) {
   const showcaseRef = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeProjectIdx, setActiveProjectIdx] = useState(0);
@@ -37,11 +37,11 @@ export default function ProjectShowcase({ projects, setCursor, mousePos }) {
 
   // 3D image tilt distortion on hover
   const getTiltTransform = (cardId) => {
-    if (window.innerWidth < 768) return {};
-    const x = (mousePos.x / window.innerWidth - 0.5) * 12;
-    const y = (mousePos.y / window.innerHeight - 0.5) * 12;
+    if (typeof window === 'undefined' || window.innerWidth < 768) return {};
+    const x = (mousePos.x / window.innerWidth - 0.5) * 8;
+    const y = (mousePos.y / window.innerHeight - 0.5) * 8;
     return {
-      transform: `perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg) scale3d(1.02, 1.02, 1.02)`
+      transform: `perspective(1000px) rotateY(${x.toFixed(1)}deg) rotateX(${(-y).toFixed(1)}deg) scale3d(1.02, 1.02, 1.02)`
     };
   };
 
@@ -74,7 +74,8 @@ export default function ProjectShowcase({ projects, setCursor, mousePos }) {
                     alt={project.title} 
                     width="1200" 
                     height="896" 
-                    loading="eager" 
+                    loading="lazy"
+                    decoding="async" 
                   />
                   <div className="project__media-badge">EXPLORE DETAILS ↗</div>
                 </div>
@@ -127,4 +128,5 @@ export default function ProjectShowcase({ projects, setCursor, mousePos }) {
       />
     </section>
   );
-}
+});
+

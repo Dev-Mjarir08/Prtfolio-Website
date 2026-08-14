@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ProcessTimeline({ steps, setCursor }) {
+export default React.memo(function ProcessTimeline({ steps, setCursor }) {
   const containerRef = useRef(null);
   const lineRef = useRef(null);
 
@@ -34,12 +34,14 @@ export default function ProcessTimeline({ steps, setCursor }) {
         stagger: 0.15,
         duration: 0.8,
         ease: 'power3.out',
+        clearProps: 'transform,opacity',
         scrollTrigger: {
           trigger: '.process__list',
           start: 'top 75%'
         }
       });
     }, containerRef);
+
 
     return () => ctx.revert();
   }, []);
@@ -71,4 +73,5 @@ export default function ProcessTimeline({ steps, setCursor }) {
       </div>
     </section>
   );
-}
+});
+

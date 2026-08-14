@@ -19,6 +19,31 @@ export const PORTFOLIO_DATA = {
   projects: [
     {
       id: "01",
+      slug: "amdox-erp",
+      title: "AMDOX ERP SYSTEM",
+      shortTitle: "AMDOX ERP",
+      subtitle: "MERN Stack · Enterprise ERP System",
+      category: "MERN Stack · Enterprise ERP System",
+      image: "assets/amdox-erp.png",
+      description: "A full-stack enterprise resource planning (ERP) system engineered with the MERN stack (MongoDB, Express.js, React.js, Node.js), featuring interactive data analytics with Recharts, RESTful API architecture, and responsive dashboard UI.",
+      tags: ["MongoDB", "Express.js", "React.js", "Node.js", "Tailwind CSS", "Recharts", "REST API"],
+      github: "https://github.com/Dev-Mjarir08/project-Amdox",
+      demo: "https://project-amdox.vercel.app/",
+      details: {
+        client: "Full Stack Enterprise ERP Solution",
+        year: "2026 (Present)",
+        overview: "AMDOX ERP System is a comprehensive full-stack enterprise resource planning dashboard designed for real-time inventory management, financial analytics visualization, and secure API data handling.",
+        features: [
+          "Full-stack MERN architecture with Node.js backend & MongoDB database",
+          "Interactive data analytics & financial charts powered by Recharts",
+          "RESTful APIs for real-time resource management and status tracking",
+          "Responsive enterprise utility dashboard designed with Tailwind CSS"
+        ]
+      }
+    },
+
+    {
+      id: "02",
       slug: "noir",
       title: "NOIR",
       subtitle: "Creative Web · Luxury Fashion",
@@ -41,7 +66,7 @@ export const PORTFOLIO_DATA = {
       }
     },
     {
-      id: "02",
+      id: "03",
       slug: "emspro",
       title: "EMPLOYEE MANAGEMENT SYSTEM",
       shortTitle: "emsPRO",
@@ -65,7 +90,7 @@ export const PORTFOLIO_DATA = {
       }
     },
     {
-      id: "03",
+      id: "04",
       slug: "shopindia",
       title: "SHOPINDIA",
       subtitle: "MERN Stack · Full Stack E-Commerce",
@@ -88,7 +113,7 @@ export const PORTFOLIO_DATA = {
       }
     },
     {
-      id: "04",
+      id: "05",
       slug: "movie-library",
       title: "MOVIE LIBRARY APP",
       subtitle: "React & Redux · API Integration",
@@ -109,8 +134,10 @@ export const PORTFOLIO_DATA = {
           "Fully responsive card grid layout with detailed movie modal views"
         ]
       }
-    }
+    },
+    
   ],
+
 
   skills: [
     {

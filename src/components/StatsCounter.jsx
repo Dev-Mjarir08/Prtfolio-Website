@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function StatsCounter({ stats, setCursor }) {
+export default React.memo(function StatsCounter({ stats, setCursor }) {
   const statsRef = useRef(null);
 
   useEffect(() => {
@@ -53,4 +53,5 @@ export default function StatsCounter({ stats, setCursor }) {
       </div>
     </section>
   );
-}
+});
+

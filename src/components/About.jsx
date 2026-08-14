@@ -6,7 +6,7 @@ import Timeline from './Timeline';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function About({ data, setCursor }) {
+export default React.memo(function About({ data, setCursor }) {
   const sectionRef = useRef(null);
   const portraitRef = useRef(null);
   const textRef = useRef(null);
@@ -71,8 +71,8 @@ export default function About({ data, setCursor }) {
               alt="Jarir Multani portrait" 
               width="896" 
               height="1200" 
-              loading="eager" 
-              fetchpriority="high" 
+              loading="lazy"
+              decoding="async" 
             />
           </div>
           <span className="about__portrait-caption">Fig. 01 — Jarir Multani, Full Stack Developer</span>
@@ -94,4 +94,5 @@ export default function About({ data, setCursor }) {
       <Timeline items={data.timeline} setCursor={setCursor} />
     </section>
   );
-}
+});
+
