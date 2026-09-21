@@ -93,11 +93,16 @@ export default function Navbar() {
             className="group flex items-center font-display text-lg md:text-xl font-bold tracking-tight text-brand-text select-none"
             aria-label="Jarir Multani Home"
           >
-            <div className="relative flex items-center gap-1 px-3 py-1 rounded-lg border border-transparent group-hover:border-accent/40 group-hover:bg-accent/[0.06] group-hover:shadow-[0_0_15px_rgba(56,189,248,0.3)] transition-all duration-300">
-              <span className="text-white group-hover:text-accent font-orbitron italic transition-all duration-300 group-hover:-translate-y-0.5 inline-block">
+            <div className="relative flex items-center gap-2 px-2.5 py-1 rounded-lg border border-transparent group-hover:border-accent/40 group-hover:bg-accent/[0.06] group-hover:shadow-[0_0_15px_rgba(56,189,248,0.3)] transition-all duration-300">
+              <img
+                src="/image.png"
+                alt="Jarir Multani Logo"
+                className="h-6 w-6 object-contain rounded transition-transform duration-300 group-hover:scale-110"
+              />
+              <span className="text-white group-hover:text-accent font-orbitron italic transition-all duration-300 group-hover:-translate-y-0.5 inline-block font-bold">
                 M
               </span>
-              <span className="text-white group-hover:text-accent font-orbitron italic transition-all duration-300 group-hover:translate-y-0.5 inline-block">
+              <span className="text-white group-hover:text-accent font-orbitron italic transition-all duration-300 group-hover:translate-y-0.5 inline-block font-bold">
                 J
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-accent scale-0 group-hover:scale-100 transition-transform duration-300 ml-0.5 shadow-[0_0_6px_#38BDF8]" />
