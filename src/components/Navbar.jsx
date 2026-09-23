@@ -94,11 +94,6 @@ export default function Navbar() {
             aria-label="Jarir Multani Home"
           >
             <div className="relative flex items-center gap-2 px-2.5 py-1 rounded-lg border border-transparent group-hover:border-accent/40 group-hover:bg-accent/[0.06] group-hover:shadow-[0_0_15px_rgba(56,189,248,0.3)] transition-all duration-300">
-              <img
-                src="/image.png"
-                alt="Jarir Multani Logo"
-                className="h-6 w-6 object-contain rounded transition-transform duration-300 group-hover:scale-110"
-              />
               <span className="text-white group-hover:text-accent font-orbitron italic transition-all duration-300 group-hover:-translate-y-0.5 inline-block font-bold">
                 M
               </span>
